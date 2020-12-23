@@ -8,8 +8,9 @@ const { check, validationResult} = require('express-validator');
 // @route  GET api/profile/me
 // @desc   Get current user's profile
 // @access Private
-router.get('/me', auth, async (req, res) => { // async - using ongoose, returning a promise
-    try {
+router.get('/me', auth, async (req, res) => { // async - using mongoose, returning a promise
+
+    try { //mongoose try/catch
         const profile = await Profile.findOne({ user: req.user.id }).populate('user', ['name', 'avatar']); // _id field of the user
 
         if (!profile){
@@ -206,6 +207,27 @@ router.put('/experience', [auth,
         await profile.save();
 
         res.json(profile);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+
+// @route  DELETE api/profile/experience/:exp_id
+// @desc   Delete experience from profile
+// @access Private
+
+router.delete('/experience/:exp_id', auth, async (req, res) => {
+    try {
+        const profile = await Profile.findOne({ user: req.user.id }); // getting profile of logged in user
+
+        // Get remove index
+        const removeIndex = profile.experience.map(item => item.id).indexOf(req.param.exp_id); // get index of experience matching the one that needs to be deleted
+
+        profile.experience.splice(removeIndex, 1);
+        await profile.save();
+        res.json(profile);
+
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error');
