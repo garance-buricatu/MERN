@@ -5,7 +5,7 @@ const config = require('config');
 // next is a callback that needs to be run so that it moves on to the next piece of middleware
 module.exports = function(req, res, next) {
     // Get token from header
-    const token = req.header('x-auth-token'); // obtaining token from header
+    const token = req.header('x-auth-token'); // obtaining token from header of GET request
 
     // Check if no token
     if (!token) {

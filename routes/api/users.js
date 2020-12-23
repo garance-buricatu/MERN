@@ -20,6 +20,8 @@ router.post('/',
     check('password', 'Please enter a password with 6 or more characters').isLength({min : 6})
 ], 
 async (req, res) => {
+
+    // checking for correct formatting of POST request
     const errors = validationResult(req);
     if (!errors.isEmpty()){ // bad request and return above error messages
         return res.status(400).json({ errors: errors.array()});
