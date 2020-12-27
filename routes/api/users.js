@@ -25,13 +25,14 @@ async (req, res) => {
     if (!errors.isEmpty()){ // bad request and return above error messages
         return res.status(400).json({ errors: errors.array()});
     }
-    // console.log(req.body); --> in postman, when api is called, body is sent with POST request. this displays the body
+
     // destructure req.body (neater use)
-    const { name, email, password } = req.body;
+    const { name, email, password } = req.body; // need middleware to access req.body
 
     try {
         // See if the user exists (duplicated user --> error)
-        let user = await User.findOne({ email }); // NOTE: any functiont hat returns a promise should use "await"
+        let user = await User.findOne({ email }); 
+        // NOTE: any function that returns a promise should use "await" AND outer function must be labeled as "async"
         if (user) { // if user exists
             return res.status(400).json({ errors: [ {msg: 'User already Exists'} ]});
         }
@@ -56,7 +57,8 @@ async (req, res) => {
 
         await user.save();
 
-        // return jsonwebtoken
+        // return jsonwebtoken --> in the frontend, when the user registers, this allows user to get logged in right away after registering 
+        // (need web token to login)
         const payload = {
             user: {
                 id: user.id //_id of saved user (mongoose allows for "id" field instead of "_id")

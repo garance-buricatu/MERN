@@ -7,7 +7,7 @@ const app = express();
 // Connect database
 connectDB();
 
-// Init middleware (getting data in req.body), ie. see users.js
+// Init middleware (getting data in req.body), ie. vody parser
 app.use(express.json({extended: false}));
 
 app.get('/', (req, res) => res.send('API Running')); //endpount to test
