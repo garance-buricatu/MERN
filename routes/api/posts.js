@@ -72,7 +72,7 @@ router.get('/:id', auth, async (req, res) => {
 });
 
 // @route  DELETE api/posts/:id
-// @desc   Delete a port by id
+// @desc   Delete a post by id
 // @access Private
 
 router.delete('/:id', auth, async (req, res) => {
@@ -86,7 +86,7 @@ router.delete('/:id', auth, async (req, res) => {
 
         // req.user.id is logged in user
         if (post.user.toString() !== req.user.id){ //post.user is an object so needs to be converted to a string
-            return res,status(401).json({ msg: "User not authorized" });
+            return res.status(401).json({ msg: "User not authorized" });
         }
 
         await post.remove();
@@ -105,7 +105,7 @@ router.delete('/:id', auth, async (req, res) => {
 
 router.put('/like/:id', auth, async (req, res) => {
     try {
-        const post = Post.findById(req.params.id);
+        const post = await Post.findById(req.params.id);
 
         // Check if post has already been liked
         if (post.likes.filter(like => like.user.toString() === req.user.id).length > 0 ){
@@ -128,7 +128,7 @@ router.put('/like/:id', auth, async (req, res) => {
 
 router.put('/unlike/:id', auth, async (req, res) => {
     try {
-        const post = Post.findById(req.params.id);
+        const post = await Post.findById(req.params.id);
 
         // Check if post has already been liked
         if (post.likes.filter(like => like.user.toString() === req.user.id).length === 0 ){
@@ -187,7 +187,7 @@ router.post(
     });
 
 // @route  DELETE api/posts/comment/:id/:comment_id
-// @desc   Delete a post
+// @desc   Delete a post (id_of_post/id_of_comment)
 // @access Private
 
 router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
@@ -203,7 +203,7 @@ router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
         }
 
         // Make sure user that deletes comment is user that created the comment
-        if (comment.user.toString() !== req.params.id) { //NOTE: comment.user is a user ID AND req.params.id is id of logged in user
+        if (comment.user.toString() !== req.user.id) { //NOTE: comment.user is a user ID AND req.user.id is id of logged in user
             return res.status(401).json({msg: 'User not authorized'});
         }
 
