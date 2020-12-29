@@ -39,6 +39,7 @@ async (req, res) => {
         return res.status(400).json({ errors: errors.array()});
     }
     // console.log(req.body); --> in postman, when api is called, body is sent with POST request. this displays the body
+    
     // destructure req.body (neater use)
     const { email, password } = req.body;
 

@@ -1,9 +1,15 @@
 import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types'
+
+// redux
+import { connect } from 'react-redux';
+import { setAlert } from '../../actions/alert';
+import { register } from '../../actions/auth';
 
 // import axios from 'axios';
 
-export const Register = () => {
+export const Register = ({ setAlert, register }) => {
     const [formData, setFormData] = useState({
         name: '',
         email:'',
@@ -19,32 +25,17 @@ export const Register = () => {
     const onSubmit = async e => {
         e.preventDefault();
         if (password !== password2){
-            console.log('Passwords do not match');
+            // call action when passwords do not match --> send message and alert type --> see actions/alert.js
+            setAlert('Passwords do not match', 'danger');
         }
         else {
 
-            // EX - calling a backend API - will happen with redux
-            // const newUser = {
-            //     name, //same as name:name
-            //     email,
-            //     password
-            // }
-
-            // try {
-            //     const config = {
-            //         headers: {
-            //             'Content-Type': 'Application/json'
-            //         }
-            //     }
-            //     const body = JSON.stringify(newUser);
-
-            //     //Register user route
-            //     const res = await axios.post('/api/users', body, config);
-            //     console.log(res.data); // should output token
-
-            // } catch (err) {
-            //     console.error(err.response.data);
-            // }
+           // call register action
+           register({
+               name, // pulled from formData
+               email,
+               password
+           });
             
             console.log('SUCCESS!');
         }
@@ -61,7 +52,7 @@ export const Register = () => {
                     name="name" 
                     value={name} 
                     onChange = {e => onChange(e)} 
-                    required />
+                    />
                 </div>
                 <div className="form-group">
                 <input 
@@ -70,7 +61,7 @@ export const Register = () => {
                     name="email"
                     value={email}
                     onChange = {e => onChange(e)}
-                    required />
+                    />
                 <small className="form-text"
                     >This site uses Gravatar so if you want a profile image, use a
                     Gravatar email</small
@@ -81,7 +72,6 @@ export const Register = () => {
                     type="password"
                     placeholder="Password"
                     name="password"
-                    minLength="6"
                     value={password} 
                     onChange = {e => onChange(e)} 
                 />
@@ -91,7 +81,6 @@ export const Register = () => {
                     type="password"
                     placeholder="Confirm Password"
                     name="password2"
-                    minLength="6"
                     value={password2} 
                     onChange = {e => onChange(e)} 
                 />
@@ -105,4 +94,13 @@ export const Register = () => {
     )
 }
 
-export default Register
+Register.propTypes = {
+    setAlert: PropTypes.func.isRequired,
+    register: PropTypes.func.isRequired
+}
+
+{/* need to add the setAlert action here to make it avaliable within "props" parameter above, wchih has been destructured*/}
+export default connect(
+    null, 
+    { setAlert, register } 
+)(Register);
