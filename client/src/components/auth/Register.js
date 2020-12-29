@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types'
 
 // redux
@@ -9,7 +9,7 @@ import { register } from '../../actions/auth';
 
 // import axios from 'axios';
 
-export const Register = ({ setAlert, register }) => {
+export const Register = ({ setAlert, register, isAuthenticated }) => {
     const [formData, setFormData] = useState({
         name: '',
         email:'',
@@ -39,7 +39,13 @@ export const Register = ({ setAlert, register }) => {
             
             console.log('SUCCESS!');
         }
+    };
+
+    // Redirect if logged in
+    if (isAuthenticated){
+        return <Redirect to="/dashboard" />
     }
+
     return (
         <Fragment>
             <h1 className="large text-primary">Sign Up</h1>
@@ -96,11 +102,16 @@ export const Register = ({ setAlert, register }) => {
 
 Register.propTypes = {
     setAlert: PropTypes.func.isRequired,
-    register: PropTypes.func.isRequired
+    register: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool
 }
+
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated // get auth state ie. { token, isAuthenticated, loading, user }
+});
 
 {/* need to add the setAlert action here to make it avaliable within "props" parameter above, wchih has been destructured*/}
 export default connect(
-    null, 
+    mapStateToProps, 
     { setAlert, register } 
 )(Register);

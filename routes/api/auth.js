@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
 // @route  GET api/auth
-// @desc   Test route
+// @desc   Validate token and load user
 // @access Public
 router.get('/', auth,  async (req, res) => { // adding "auth" as a parameter makes this route protected
     //res.send('Auth route')
@@ -23,7 +23,7 @@ router.get('/', auth,  async (req, res) => { // adding "auth" as a parameter mak
 }); 
 
 // @route  POST api/auth
-// @desc   Authenticate User and get token
+// @desc   Login User and get token
 // @access Public
 router.post('/', 
 [

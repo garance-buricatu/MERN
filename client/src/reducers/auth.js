@@ -1,6 +1,11 @@
 import {
     REGISTER_SUCCESS,
-    REGISTER_FAIL
+    REGISTER_FAIL,
+    USER_LOADED,
+    AUTH_ERROR,
+    LOGIN_SUCCESS,
+    LOGIN_FAIL,
+    LOGOUT
 } from '../actions/types';
 
 const initialState = { //deafult values
@@ -13,7 +18,15 @@ const initialState = { //deafult values
 export default function(state = initialState, action) {
     const { type, payload } = action;
     switch(type) {
+        case USER_LOADED:
+            return {
+                ...state,
+                isAuthenticated: true,
+                loading: false,
+                user: payload
+            }
         case REGISTER_SUCCESS:
+        case LOGIN_SUCCESS:
             localStorage.setItem('token', payload.token); // put token that is returned inside local storage
             return {
                 ...state, 
@@ -22,7 +35,10 @@ export default function(state = initialState, action) {
                 loading: false
             }
         case REGISTER_FAIL:
-            localStorage.removeItem('token');
+        case AUTH_ERROR:
+        case LOGIN_FAIL:
+        case LOGOUT:
+            localStorage.removeItem('token'); //never want to have a token in local storage that is not valid
             return {
                 ...state, 
                 token: null,
