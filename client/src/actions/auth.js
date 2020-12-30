@@ -78,7 +78,9 @@ export const login = ( email, password ) => async dispatch => {
             type: LOGIN_SUCCESS,
             payload: res.data // the token
         });
+
         dispatch(loadUser());
+        
     } catch (err) {
         const errors = err.response.data.errors;
         if (errors) {
