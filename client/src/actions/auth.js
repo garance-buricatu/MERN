@@ -8,7 +8,8 @@ import {
     AUTH_ERROR,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
-    LOGOUT
+    LOGOUT,
+    CLEAR_PROFILE
 } from './types';
 
 // load user - given a token (stored in local storage), call /api/auth api to validate token and load user
@@ -92,6 +93,9 @@ export const login = ( email, password ) => async dispatch => {
 
 // Logout /clear profile
 export const logout = () => dispatch => {
+    dispatch({
+        type: CLEAR_PROFILE
+    });
     dispatch({
         type: LOGOUT
     });

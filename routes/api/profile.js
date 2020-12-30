@@ -8,7 +8,7 @@ const request = require('request');
 const config = require('config');
 
 // @route  GET api/profile/me
-// @desc   Get current user's profile
+// @desc   Get profile of user curerntly logged in 
 // @access Private
 router.get('/me', auth, async (req, res) => { // async - using mongoose, returning a promise
 
