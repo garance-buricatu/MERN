@@ -110,7 +110,7 @@ const mapStateToProps = state => ({
     isAuthenticated: state.auth.isAuthenticated // get auth state ie. { token, isAuthenticated, loading, user }
 });
 
-{/* need to add the setAlert action here to make it avaliable within "props" parameter above, wchih has been destructured*/}
+{/* need to add the setAlert action here to make it avaliable within "props" parameter above, which has been destructured*/}
 export default connect(
     mapStateToProps, 
     { setAlert, register } 

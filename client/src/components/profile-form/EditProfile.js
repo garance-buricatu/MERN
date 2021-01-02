@@ -46,7 +46,6 @@ const EditProfile = ({ createProfile, getCurrentProfile, profile: { profile, loa
             location: loading || !profile.location ? '' : profile.location,
             status: loading || !profile.status ? '' : profile.status,
             skills: loading || !profile.skills ? '' : profile.skills.join(','),
-            company: loading || !profile.company ? '' : profile.company,
             githubusername: loading || !profile.githubusername ? '' : profile.githubusername,
             bio: loading || !profile.bio ? '' : profile.bio,
             twitter: loading || !profile.twitter ? '' : profile.twitter,
@@ -55,7 +54,7 @@ const EditProfile = ({ createProfile, getCurrentProfile, profile: { profile, loa
             youtube: loading || !profile.youtube ? '' : profile.youtube,
             instagram: loading || !profile.instagram ? '' : profile.instagram
         });
-    }, [loading]);
+    }, [loading, getCurrentProfile]);
 
     const onChange = (e) => {
         setFormData({
