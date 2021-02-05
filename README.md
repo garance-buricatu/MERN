@@ -15,5 +15,8 @@ Documentation: https://expressjs.com/en/5x/api.html#express
 ### To Start
 npm run dev in terminal
 
+#### Project Specs
+https://github.com/bradtraversy/devconnector_2.0
+
 #### Links to Styles Video
 https://www.youtube.com/watch?v=IFM9hbapeA0&list=PLillGF-Rfqba3xeEvDzIcUCxwMlGiewfV&ab_channel=TraversyMedia
