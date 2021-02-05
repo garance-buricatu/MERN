@@ -21,16 +21,16 @@ This course includes...
 
 * Extensive API testing with Postman
 
-Integrating React with our backend in an elegant way, creating a great workflow
+* Integrating React with our backend in an elegant way, creating a great workflow
 
-Building our frontend to work with the API
+* Building our frontend to work with the API
 
-Using Redux for app state management
+* Using Redux for app state management
 
-Creating reducers and actions for our resources
+* Creating reducers and actions for our resources
 
-Creating many container components that integrate with Redux
+* Creating many container components that integrate with Redux
 
-Testing with the Redux Chrome extension
+* Testing with the Redux Chrome extension
 
-Creating a build script, securing our keys and deploy to Heroku using Git
+* Creating a build script, securing our keys and deploy to Heroku using Git
