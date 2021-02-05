@@ -12,8 +12,7 @@ https://github.com/bradtraversy/devconnector_2.0
 https://www.youtube.com/watch?v=IFM9hbapeA0&list=PLillGF-Rfqba3xeEvDzIcUCxwMlGiewfV&ab_channel=TraversyMedia
 
 
-#### This course includes:
-This course includes...
+#### This course includes...
 
 * Building an extensive backend API with Node.js & Express
 
