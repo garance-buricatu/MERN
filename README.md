@@ -2,8 +2,16 @@
 ## Instructor: Brad Traversy
 ### Build and deploy a social network with Node.js, Express, React, Redux & MongoDB. Fully updated April 2019
 
-### To Start
-npm run dev in terminal
+### Install Dependencies
+```
+npm install
+```
+
+### Run App
+```
+# Run in dev mode
+npm run dev
+```
 
 #### Project Specs
 https://github.com/bradtraversy/devconnector_2.0
